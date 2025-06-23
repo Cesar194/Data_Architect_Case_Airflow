@@ -29,6 +29,8 @@ El pipeline propuesto sigue un patrón de ETL orquestado, utilizando servicios g
 
 Arquitectura Imagen: https://drive.google.com/file/d/1A69qYxrGojpNSV4KMzIgPFjryV12RU60/view?usp=sharing
 
+Dataflow Job Details: https://drive.google.com/file/d/1lBSa5_zM6-SantKTo42n8JBgywBKuIyI/view?usp=sharing
+
 ## 2. Justificación de Herramientas
 
 * **Dataflow (Apache Beam):** Se eligió por ser la herramienta ETL serverless y nativa de GCP. Proporciona auto-scaling, lo que significa que GCP gestiona los recursos computacionales necesarios según la carga de trabajo. Apache Beam, con su SDK de Python, ofrece un modelo de programación unificado tanto para batch como para streaming y es ideal para transformaciones a nivel de fila y enriquecimientos complejos, como el join condicional requerido en este caso.

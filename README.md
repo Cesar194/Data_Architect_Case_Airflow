@@ -56,20 +56,21 @@ Arquitectura Imagen: https://drive.google.com/file/d/1A69qYxrGojpNSV4KMzIgPFjryV
 1. Configurar Proyecto GCP: Abre una Cloud Shell o usa gcloud CLI. Ejecuta gcloud config set project TU_PROYECTO_ID.
 2. Crear Bucket de GCS: gsutil mb -p TU_PROYECTO_ID gs://retail-data-zone/
 3. Crear Dataset en BigQuery: bq mk --dataset TU_PROYECTO_ID:retail
-4. Crear Tablas en BigQuery: Ejecuta el contenido de los dos archivos SQL DDL en la consola de BigQuery UI o usando bq query < create_table.sql.
+4. Crear Tablas en BigQuery: Ejecuta el contenido de los dos archivos SQL DDL provistos en este repositorio en la consola de BigQuery UI o usando bq query < create_table.sql. Deberian quedar estructuradas de la siguiente manera `ref_exchange_rates`(https://drive.google.com/file/d/1CwqP2MD5weeI0SXXSVU4ZEXKRiNcUwdN/view?usp=sharing) y `analytics_sales_usd` (https://drive.google.com/file/d/1s61oG3a4St7gxgYEEpouIYB2z9Z2bD51/view?usp=sharing)
 5. Subir Datos de Ejemplo:
-  - Crea un archivo local 2025-06-22.csv con el contenido del ejemplo.
-  - Súbelo a GCS: gsutil cp 2025-06-22.csv gs://retail-data-zone/sales/2025-06-22.csv
+  - Crea un archivo local 2025-06-23.csv con el contenido del ejemplo. https://drive.google.com/file/d/16yBes_dBazHdBrbitalY8Y29EJ71fLIL/view?usp=sharing
+  - Súbelo a GCS: gsutil cp 2025-06-22.csv gs://retail-data-zone/sales/2025-06-23.csv
   
 **Configurar Cloud Composer:**
 
-1. Crea un ambiente de Cloud Composer.
+1. Crea un ambiente de Cloud Composer. https://drive.google.com/file/d/1oRsCApCYsZFInkeTwG_izzrmotgeDnVt/view?usp=sharing
 2. Asi debe de quedar configurado los Pypi Packages: https://drive.google.com/file/d/1EqJ4DXDLe25UWyi3k4OQGLVaS0GEDBkc/view?usp=sharing
-3. Sube el script beam_sales_pipeline.py al subdirectorio dags/ del bucket de Composer (o a una ruta como gs://<composer-bucket>/src/).
+3. Sube el script beam_sales_pipeline.py al subdirectorio dags/ del bucket de Composer. 
 4. Sube el DAG sales_dag.py al directorio dags/ del bucket de Composer.
 5. Activar y Ejecutar el DAG:
   * Abre la UI de Airflow desde la página de Composer.
   * Busca el DAG daily_sales_processing, actívalo y dispáralo manualmente para una fecha específica (ej. 2025-06-22) para probarlo.
+  * Resultado final es que el Job de Dataflow deberia de ejecurtase sin problema, lo que puedes corroborar viendo los jobs de Dataflow haciendo click aqui https://console.cloud.google.com/dataflow/jobs y la tabla de bigquery `analytics_sales_usd` debe de actualizarse de la siguiente manera: https://drive.google.com/file/d/1vAHGlzmsnEIVUm5lPC8uFilmcYkIf015/view?usp=sharing
 
 **Actualizar el Paquete PyPI en Cloud Composer (Recomendado):**
 

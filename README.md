@@ -70,7 +70,7 @@ Dataflow Job Details: https://drive.google.com/file/d/1lBSa5_zM6-SantKTo42n8JBgy
 3. Sube el script beam_sales_pipeline.py al subdirectorio dags/ del bucket de Composer. 
 4. Sube el DAG sales_dag.py al directorio dags/ del bucket de Composer. https://drive.google.com/file/d/19rmiF3O0SdCEx9sGtvf3fqPSt71rHLcp/view?usp=sharing
 5. Activar y Ejecutar el DAG:
-  * Abre la UI de Airflow desde la página de Composer.
+  * Abre la UI de Airflow desde la página de Composer. https://drive.google.com/file/d/1OX0VkZhZ02RihvtdV6KEWovLT97-hQCl/view?usp=sharing
   * Busca el DAG daily_sales_processing, actívalo y dispáralo manualmente para una fecha específica (ej. 2025-06-22) para probarlo.
   * Resultado final es que el Job de Dataflow deberia de ejecurtase sin problema, lo que puedes corroborar viendo los jobs de Dataflow haciendo click aqui https://console.cloud.google.com/dataflow/jobs y asi deberian de verse los jobs de dataflow que corran con exito https://drive.google.com/file/d/17lSZAXI-y06PtwfX7vtCW1C8QRFUGcna/view?usp=sharing. la tabla de bigquery `analytics_sales_usd` debe de actualizarse de la siguiente manera: https://drive.google.com/file/d/1vAHGlzmsnEIVUm5lPC8uFilmcYkIf015/view?usp=sharing
 

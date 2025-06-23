@@ -51,26 +51,26 @@ Arquitectura Imagen: https://drive.google.com/file/d/1A69qYxrGojpNSV4KMzIgPFjryV
 
 4.  **Carga (Load):** Los registros transformados y enriquecidos se cargan en la tabla destino `retail.analytics_sales_usd` en BigQuery. El conector de BigQuery para Beam maneja la escritura de manera eficiente. El pipeline está configurado para **añadir** los nuevos datos (`WRITE_APPEND`), lo cual es apropiado para una carga diaria.
 
-**Pasos de Despliegue en GCP (para el evaluador):**
+## 4. Pasos de Despliegue en GCP (para el evaluador):
 
-- Configurar Proyecto GCP: Abre una Cloud Shell o usa gcloud CLI. Ejecuta gcloud config set project TU_PROYECTO_ID.
-- Crear Bucket de GCS: gsutil mb -p TU_PROYECTO_ID gs://retail-data-zone/
-- Crear Dataset en BigQuery: bq mk --dataset TU_PROYECTO_ID:retail
-- Crear Tablas en BigQuery: Ejecuta el contenido de los dos archivos SQL DDL en la consola de BigQuery UI o usando bq query < create_table.sql.
-- Subir Datos de Ejemplo:
-   Crea un archivo local 2025-06-22.csv con el contenido del ejemplo.
-   Súbelo a GCS: gsutil cp 2025-06-22.csv gs://retail-data-zone/sales/2025-06-22.csv
+1. Configurar Proyecto GCP: Abre una Cloud Shell o usa gcloud CLI. Ejecuta gcloud config set project TU_PROYECTO_ID.
+2. Crear Bucket de GCS: gsutil mb -p TU_PROYECTO_ID gs://retail-data-zone/
+3. Crear Dataset en BigQuery: bq mk --dataset TU_PROYECTO_ID:retail
+4. Crear Tablas en BigQuery: Ejecuta el contenido de los dos archivos SQL DDL en la consola de BigQuery UI o usando bq query < create_table.sql.
+5. Subir Datos de Ejemplo:
+  - Crea un archivo local 2025-06-22.csv con el contenido del ejemplo.
+  - Súbelo a GCS: gsutil cp 2025-06-22.csv gs://retail-data-zone/sales/2025-06-22.csv
   
 **Configurar Cloud Composer:**
 
-- Crea un ambiente de Cloud Composer.
-- Sube el script beam_sales_pipeline.py al subdirectorio dags/ del bucket de Composer (o a una ruta como gs://<composer-bucket>/src/).
-- Sube el DAG sales_dag.py al directorio dags/ del bucket de Composer.
-- Activar y Ejecutar el DAG:
+1. Crea un ambiente de Cloud Composer.
+2. Sube el script beam_sales_pipeline.py al subdirectorio dags/ del bucket de Composer (o a una ruta como gs://<composer-bucket>/src/).
+3. Sube el DAG sales_dag.py al directorio dags/ del bucket de Composer.
+4. Activar y Ejecutar el DAG:
   * Abre la UI de Airflow desde la página de Composer.
   * Busca el DAG daily_sales_processing, actívalo y dispáralo manualmente para una fecha específica (ej. 2025-06-22) para probarlo.
     
-## 4. Consideraciones Adicionales
+## 5. Consideraciones Adicionales
 
 * **Idempotencia:** El pipeline está diseñado para ser idempotente. Si se vuelve a ejecutar para una fecha específica, se puede configurar para que sobrescriba la partición de ese día (`WRITE_TRUNCATE` en una partición específica), garantizando la consistencia de los datos. La implementación actual utiliza `WRITE_APPEND` para simplicidad.
   

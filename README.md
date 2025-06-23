@@ -69,6 +69,22 @@ Arquitectura Imagen: https://drive.google.com/file/d/1A69qYxrGojpNSV4KMzIgPFjryV
 4. Activar y Ejecutar el DAG:
   * Abre la UI de Airflow desde la página de Composer.
   * Busca el DAG daily_sales_processing, actívalo y dispáralo manualmente para una fecha específica (ej. 2025-06-22) para probarlo.
+
+**Actualizar el Paquete PyPI en Cloud Composer (Recomendado)**
+Para que los archivos python funcionen sin problema, mi recomendacion es actualizar el paquete apache-airflow-providers-google a una versión más reciente. Esto dará acceso a los operadores más nuevos, correcciones de errores y mejoras de rendimiento.
+
+Puedes hacerlo desde la consola de Cloud Composer UI o usando gcloud:
+
+* Encuentra la versión actual: Ve a tu ambiente de Composer en la consola de GCP -> Pestaña "Paquetes PyPI" y busca apache-airflow-providers-google.
+* Actualiza el paquete:
+ - Vía UI: Haz clic en "Editar", busca el paquete y especifica una versión más reciente (ej. ==10.9.0).
+ - Vía gcloud (ejemplo):
+
+Bash
+
+gcloud composer environments update TU-AMBIENTE-COMPOSER \
+    --location TU-REGION \
+    --update-pypi-package "apache-airflow-providers-google==10.9.0"
     
 ## 5. Consideraciones Adicionales
 

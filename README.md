@@ -70,7 +70,7 @@ Arquitectura Imagen: https://drive.google.com/file/d/1A69qYxrGojpNSV4KMzIgPFjryV
 5. Activar y Ejecutar el DAG:
   * Abre la UI de Airflow desde la página de Composer.
   * Busca el DAG daily_sales_processing, actívalo y dispáralo manualmente para una fecha específica (ej. 2025-06-22) para probarlo.
-  * Resultado final es que el Job de Dataflow deberia de ejecurtase sin problema, lo que puedes corroborar viendo los jobs de Dataflow haciendo click aqui https://console.cloud.google.com/dataflow/jobs y la tabla de bigquery `analytics_sales_usd` debe de actualizarse de la siguiente manera: https://drive.google.com/file/d/1vAHGlzmsnEIVUm5lPC8uFilmcYkIf015/view?usp=sharing
+  * Resultado final es que el Job de Dataflow deberia de ejecurtase sin problema, lo que puedes corroborar viendo los jobs de Dataflow haciendo click aqui https://console.cloud.google.com/dataflow/jobs y asi deberian de verse los jobs de dataflow que corran con exito https://drive.google.com/file/d/17lSZAXI-y06PtwfX7vtCW1C8QRFUGcna/view?usp=sharing. la tabla de bigquery `analytics_sales_usd` debe de actualizarse de la siguiente manera: https://drive.google.com/file/d/1vAHGlzmsnEIVUm5lPC8uFilmcYkIf015/view?usp=sharing
 
 **Actualizar el Paquete PyPI en Cloud Composer (Recomendado):**
 

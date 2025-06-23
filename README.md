@@ -58,7 +58,7 @@ Dataflow Job Details: https://drive.google.com/file/d/1lBSa5_zM6-SantKTo42n8JBgy
 1. Configurar Proyecto GCP: Abre una Cloud Shell o usa gcloud CLI. Ejecuta gcloud config set project TU_PROYECTO_ID.
 2. Crear Bucket de GCS: gsutil mb -p TU_PROYECTO_ID gs://retail-data-zone/
 3. Crear Dataset en BigQuery: bq mk --dataset TU_PROYECTO_ID:retail
-4. Crear Tablas en BigQuery: Ejecuta el contenido de los dos archivos SQL DDL provistos en este repositorio en la consola de BigQuery UI o usando bq query < create_table.sql. Deberian quedar estructuradas de la siguiente manera `ref_exchange_rates`(https://drive.google.com/file/d/1CwqP2MD5weeI0SXXSVU4ZEXKRiNcUwdN/view?usp=sharing) y `analytics_sales_usd` (https://drive.google.com/file/d/1s61oG3a4St7gxgYEEpouIYB2z9Z2bD51/view?usp=sharing)
+4. Crear Tablas en BigQuery: Ejecuta el contenido de los dos archivos SQL DDL provistos en este repositorio en la consola de BigQuery UI (https://drive.google.com/file/d/1v0c0pIWpBMYEcDw1msBh02eLbVCTktkf/view?usp=sharing) o usando bq query < create_table.sql. Deberian quedar estructuradas de la siguiente manera `ref_exchange_rates`(https://drive.google.com/file/d/1CwqP2MD5weeI0SXXSVU4ZEXKRiNcUwdN/view?usp=sharing) y `analytics_sales_usd` (https://drive.google.com/file/d/1s61oG3a4St7gxgYEEpouIYB2z9Z2bD51/view?usp=sharing)
 5. Subir Datos de Ejemplo:
   - Crea un archivo local 2025-06-23.csv con el contenido del ejemplo. https://drive.google.com/file/d/16yBes_dBazHdBrbitalY8Y29EJ71fLIL/view?usp=sharing
   - Súbelo a GCS: gsutil cp 2025-06-22.csv gs://retail-data-zone/sales/2025-06-23.csv

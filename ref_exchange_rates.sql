@@ -12,5 +12,6 @@ INSERT INTO retail.ref_exchange_rates (currency, rate_to_usd, valid_from, valid_
 VALUES
   ('EUR', 1.07, '2025-05-01', '2025-05-10'),
   ('EUR', 1.08, '2025-05-11', '2025-05-20'),
+  ('EUR', 1.09, '2025-06-01', '2025-06-30'),,
   ('ARS', 0.0011, '2025-05-01', '2025-05-31'),
   ('USD', 1.0, '2020-01-01', '2099-12-31'); -- Tasa para USD por si viene en los datos

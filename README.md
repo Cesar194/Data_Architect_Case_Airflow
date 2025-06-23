@@ -64,9 +64,10 @@ Arquitectura Imagen: https://drive.google.com/file/d/1A69qYxrGojpNSV4KMzIgPFjryV
 **Configurar Cloud Composer:**
 
 1. Crea un ambiente de Cloud Composer.
-2. Sube el script beam_sales_pipeline.py al subdirectorio dags/ del bucket de Composer (o a una ruta como gs://<composer-bucket>/src/).
-3. Sube el DAG sales_dag.py al directorio dags/ del bucket de Composer.
-4. Activar y Ejecutar el DAG:
+2. Asi debe de quedar configurado los Pypi Packages: https://drive.google.com/file/d/1EqJ4DXDLe25UWyi3k4OQGLVaS0GEDBkc/view?usp=sharing
+3. Sube el script beam_sales_pipeline.py al subdirectorio dags/ del bucket de Composer (o a una ruta como gs://<composer-bucket>/src/).
+4. Sube el DAG sales_dag.py al directorio dags/ del bucket de Composer.
+5. Activar y Ejecutar el DAG:
   * Abre la UI de Airflow desde la página de Composer.
   * Busca el DAG daily_sales_processing, actívalo y dispáralo manualmente para una fecha específica (ej. 2025-06-22) para probarlo.
 

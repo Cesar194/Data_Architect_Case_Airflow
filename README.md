@@ -26,6 +26,9 @@ El pipeline propuesto sigue un patrón de ETL orquestado, utilizando servicios g
                                   de BigQuery
                                   (retail.ref_exchange_rates)
 
+
+Arquitectura Imagen: https://drive.google.com/file/d/1A69qYxrGojpNSV4KMzIgPFjryV12RU60/view?usp=sharing
+
 ## 2. Justificación de Herramientas
 
 * **Dataflow (Apache Beam):** Se eligió por ser la herramienta ETL serverless y nativa de GCP. Proporciona auto-scaling, lo que significa que GCP gestiona los recursos computacionales necesarios según la carga de trabajo. Apache Beam, con su SDK de Python, ofrece un modelo de programación unificado tanto para batch como para streaming y es ideal para transformaciones a nivel de fila y enriquecimientos complejos, como el join condicional requerido en este caso.
@@ -51,5 +54,25 @@ El pipeline propuesto sigue un patrón de ETL orquestado, utilizando servicios g
 ## 4. Consideraciones Adicionales
 
 * **Idempotencia:** El pipeline está diseñado para ser idempotente. Si se vuelve a ejecutar para una fecha específica, se puede configurar para que sobrescriba la partición de ese día (`WRITE_TRUNCATE` en una partición específica), garantizando la consistencia de los datos. La implementación actual utiliza `WRITE_APPEND` para simplicidad.
+
+**Pasos de Despliegue en GCP (para el evaluador):**
+
+- Configurar Proyecto GCP: Abre una Cloud Shell o usa gcloud CLI. Ejecuta gcloud config set project TU_PROYECTO_ID.
+- Crear Bucket de GCS: gsutil mb -p TU_PROYECTO_ID gs://retail-data-zone/
+- Crear Dataset en BigQuery: bq mk --dataset TU_PROYECTO_ID:retail
+- Crear Tablas en BigQuery: Ejecuta el contenido de los dos archivos SQL DDL en la consola de BigQuery UI o usando bq query < create_table.sql.
+- Subir Datos de Ejemplo:
+   Crea un archivo local 2025-06-22.csv con el contenido del ejemplo.
+   Súbelo a GCS: gsutil cp 2025-06-22.csv gs://retail-data-zone/sales/2025-06-22.csv
+  
+**Configurar Cloud Composer:**
+
+- Crea un ambiente de Cloud Composer.
+- Sube el script beam_sales_pipeline.py al subdirectorio dags/ del bucket de Composer (o a una ruta como gs://<composer-bucket>/src/).
+- Sube el DAG sales_dag.py al directorio dags/ del bucket de Composer.
+- Activar y Ejecutar el DAG:
+  * Abre la UI de Airflow desde la página de Composer.
+  * Busca el DAG daily_sales_processing, actívalo y dispáralo manualmente para una fecha específica (ej. 2025-06-22) para probarlo.
+  
 * **Manejo de Errores:** Tanto Airflow como Dataflow tienen mecanismos robustos para reintentos y alertas. Se pueden configurar alertas de Cloud Monitoring para notificar si un pipeline falla.
 * **Alternativa (BigQuery SQL puro):** Una solución más simple podría usar solo Airflow y SQL de BigQuery. Esto implicaría cargar el CSV a una tabla temporal en BigQuery y luego ejecutar una consulta SQL para hacer el `JOIN` y la transformación. Si bien es menos flexible, puede ser más rentable para transformaciones que se pueden expresar completamente en SQL. La solución con Dataflow es más escalable y versátil si las reglas de negocio se vuelven más complejas en el futuro.

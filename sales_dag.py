@@ -4,7 +4,7 @@ from airflow.models.dag import DAG
 from airflow.providers.google.cloud.operators.dataflow import DataflowCreatePythonJobOperator
 
 # =============================================================================
-# --- CONFIGURACIÓN FINAL Y CORRECTA ---
+# --- CONFIGURACIÓN---
 # =============================================================================
 GCP_PROJECT_ID = "directed-gasket-309507"
 GCP_REGION = "us-east1"
@@ -40,14 +40,14 @@ with DAG(
     run_beam_pipeline = DataflowCreatePythonJobOperator(
         task_id="run_sales_beam_pipeline",
         
-        # CAMBIO CLAVE: Apuntamos al bucket de COMPOSER para el script de Python
+        # Apuntamos al bucket de COMPOSER para el script de Python
         py_file=f"gs://{GCS_COMPOSER_BUCKET}/{GCS_BEAM_SCRIPT_PATH}",
         
         job_name=f"sales-etl-{{{{ ds_nodash }}}}",
         project_id=GCP_PROJECT_ID,
         location=GCP_REGION,
         options={
-            # Las opciones de Dataflow siguen apuntando al bucket de DATOS
+            # Las opciones de Dataflow apuntan al bucket de DATOS
             "temp_location": f"gs://{GCS_DATA_BUCKET}/temp/",
             "staging_location": f"gs://{GCS_DATA_BUCKET}/staging/",
             "input_file": f"gs://{GCS_DATA_BUCKET}/sales/{{{{ ds }}}}.csv",

@@ -70,7 +70,7 @@ Arquitectura Imagen: https://drive.google.com/file/d/1A69qYxrGojpNSV4KMzIgPFjryV
   * Abre la UI de Airflow desde la página de Composer.
   * Busca el DAG daily_sales_processing, actívalo y dispáralo manualmente para una fecha específica (ej. 2025-06-22) para probarlo.
 
-**Actualizar el Paquete PyPI en Cloud Composer (Recomendado)**
+**Actualizar el Paquete PyPI en Cloud Composer (Recomendado):**
 
 Para que los archivos python funcionen sin problema, mi recomendacion es actualizar el paquete apache-airflow-providers-google a una versión más reciente. Esto dará acceso a los operadores más nuevos, correcciones de errores y mejoras de rendimiento.
 

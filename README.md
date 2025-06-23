@@ -68,7 +68,7 @@ Dataflow Job Details: https://drive.google.com/file/d/1lBSa5_zM6-SantKTo42n8JBgy
 1. Crea un ambiente de Cloud Composer. https://drive.google.com/file/d/1oRsCApCYsZFInkeTwG_izzrmotgeDnVt/view?usp=sharing
 2. Asi debe de quedar configurado los Pypi Packages: https://drive.google.com/file/d/1EqJ4DXDLe25UWyi3k4OQGLVaS0GEDBkc/view?usp=sharing
 3. Sube el script beam_sales_pipeline.py al subdirectorio dags/ del bucket de Composer. 
-4. Sube el DAG sales_dag.py al directorio dags/ del bucket de Composer.
+4. Sube el DAG sales_dag.py al directorio dags/ del bucket de Composer. https://drive.google.com/file/d/19rmiF3O0SdCEx9sGtvf3fqPSt71rHLcp/view?usp=sharing
 5. Activar y Ejecutar el DAG:
   * Abre la UI de Airflow desde la página de Composer.
   * Busca el DAG daily_sales_processing, actívalo y dispáralo manualmente para una fecha específica (ej. 2025-06-22) para probarlo.

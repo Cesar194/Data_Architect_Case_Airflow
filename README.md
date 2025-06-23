@@ -51,10 +51,6 @@ Arquitectura Imagen: https://drive.google.com/file/d/1A69qYxrGojpNSV4KMzIgPFjryV
 
 4.  **Carga (Load):** Los registros transformados y enriquecidos se cargan en la tabla destino `retail.analytics_sales_usd` en BigQuery. El conector de BigQuery para Beam maneja la escritura de manera eficiente. El pipeline está configurado para **añadir** los nuevos datos (`WRITE_APPEND`), lo cual es apropiado para una carga diaria.
 
-## 4. Consideraciones Adicionales
-
-* **Idempotencia:** El pipeline está diseñado para ser idempotente. Si se vuelve a ejecutar para una fecha específica, se puede configurar para que sobrescriba la partición de ese día (`WRITE_TRUNCATE` en una partición específica), garantizando la consistencia de los datos. La implementación actual utiliza `WRITE_APPEND` para simplicidad.
-
 **Pasos de Despliegue en GCP (para el evaluador):**
 
 - Configurar Proyecto GCP: Abre una Cloud Shell o usa gcloud CLI. Ejecuta gcloud config set project TU_PROYECTO_ID.
@@ -73,6 +69,10 @@ Arquitectura Imagen: https://drive.google.com/file/d/1A69qYxrGojpNSV4KMzIgPFjryV
 - Activar y Ejecutar el DAG:
   * Abre la UI de Airflow desde la página de Composer.
   * Busca el DAG daily_sales_processing, actívalo y dispáralo manualmente para una fecha específica (ej. 2025-06-22) para probarlo.
+    
+## 4. Consideraciones Adicionales
+
+* **Idempotencia:** El pipeline está diseñado para ser idempotente. Si se vuelve a ejecutar para una fecha específica, se puede configurar para que sobrescriba la partición de ese día (`WRITE_TRUNCATE` en una partición específica), garantizando la consistencia de los datos. La implementación actual utiliza `WRITE_APPEND` para simplicidad.
   
 * **Manejo de Errores:** Tanto Airflow como Dataflow tienen mecanismos robustos para reintentos y alertas. Se pueden configurar alertas de Cloud Monitoring para notificar si un pipeline falla.
 * **Alternativa (BigQuery SQL puro):** Una solución más simple podría usar solo Airflow y SQL de BigQuery. Esto implicaría cargar el CSV a una tabla temporal en BigQuery y luego ejecutar una consulta SQL para hacer el `JOIN` y la transformación. Si bien es menos flexible, puede ser más rentable para transformaciones que se pueden expresar completamente en SQL. La solución con Dataflow es más escalable y versátil si las reglas de negocio se vuelven más complejas en el futuro.

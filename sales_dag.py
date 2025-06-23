@@ -22,7 +22,7 @@ GCS_BEAM_SCRIPT_PATH = "dags/beam_sales_pipeline.py"
 
 default_args = {
     "owner": "Data Architecture Team",
-    "start_date": pendulum.datetime(2025, 5, 25, tz="UTC"),
+    "start_date": pendulum.datetime(2025, 6, 22, tz="UTC"),
     "retries": 1,
     "retry_delay": pendulum.duration(minutes=5),
     "dataflow_conn_id": "google_cloud_default",

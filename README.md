@@ -90,8 +90,10 @@ gcloud composer environments update TU-AMBIENTE-COMPOSER \
 ## 5. Consideraciones Adicionales
 
 * **Idempotencia:** El pipeline está diseñado para ser idempotente. Si se vuelve a ejecutar para una fecha específica, se puede configurar para que sobrescriba la partición de ese día (`WRITE_TRUNCATE` en una partición específica), garantizando la consistencia de los datos. La implementación actual utiliza `WRITE_APPEND` para simplicidad.
+
+* **NOTA:** Tener en cuenta que el Job esta seteado en Zona Horaria UTC, si trata de correr un archivo csv de un dia en especifico tomar en cuenta que debe de ser el csv del dia correspondiente en el DAG que se esta corriendo. Asi que asegurarse de tener en el bucket gs://retail-data-zone/sales/ el dia correspondiente; de lo contrario dara este error: " OSError: No files found based on the file pattern gs://retail-data-zone/sales/2025-06-22.csv"
+
   
 * **Manejo de Errores:** Tanto Airflow como Dataflow tienen mecanismos robustos para reintentos y alertas. Se pueden configurar alertas de Cloud Monitoring para notificar si un pipeline falla.
 * **Alternativa (BigQuery SQL puro):** Una solución más simple podría usar solo Airflow y SQL de BigQuery. Esto implicaría cargar el CSV a una tabla temporal en BigQuery y luego ejecutar una consulta SQL para hacer el `JOIN` y la transformación. Si bien es menos flexible, puede ser más rentable para transformaciones que se pueden expresar completamente en SQL. La solución con Dataflow es más escalable y versátil si las reglas de negocio se vuelven más complejas en el futuro.
-**NOTA:**
-  Tener en cuenta que el Job esta seteado en Zona Horaria UTC, si trata de correr un archivo csv de un dia en especifico tomar en cuenta que debe de ser el csv del dia correspondiente en el DAG que se esta corriendo. Asi que asegurarse de tener en el bucket gs://retail-data-zone/sales/ el dia correspondiente; de lo contrario dara este error: " OSError: No files found based on the file pattern gs://retail-data-zone/sales/2025-06-22.csv"
+  

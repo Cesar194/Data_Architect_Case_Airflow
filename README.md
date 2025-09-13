@@ -1,5 +1,5 @@
 # Data_Architect_CaseScenario
-Data Architect Test in GCP
+Data Architect Case Scenario in GCP
 
 # Diseño del Pipeline de Ingesta de Ventas
 

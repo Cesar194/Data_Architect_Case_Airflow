@@ -27,8 +27,6 @@ El pipeline propuesto sigue un patrón de ETL orquestado, utilizando servicios g
                                   (retail.ref_exchange_rates)
 
 
-Arquitectura Imagen: https://drive.google.com/file/d/1A69qYxrGojpNSV4KMzIgPFjryV12RU60/view?usp=sharing
-
 Dataflow Job Details: https://drive.google.com/file/d/1lBSa5_zM6-SantKTo42n8JBgywBKuIyI/view?usp=sharing
 
 ## 2. Justificación de Herramientas
